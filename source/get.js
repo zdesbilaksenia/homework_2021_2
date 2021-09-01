@@ -2,17 +2,15 @@
 
 const get = (object, properties) => {
     if (typeof object !== 'object' || typeof properties !== 'string')
-        return undefined;
+        return;
 
     const listOfProperties = properties.split('.');
-    for (let i = 0; i < listOfProperties.length; i++) {
-        if (listOfProperties[i] !== '') {
+    listOfProperties.forEach(item => {
+        if (item) {
             if (object !== undefined)
-                object = object[listOfProperties[i]];
-            else
-                object = undefined;
+                object = object[item];
         }
-    }
+    })
 
     return object;
 }
