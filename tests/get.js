@@ -71,4 +71,23 @@ QUnit.module('Тестируем функцию get', function () {
 		assert.strictEqual(get(1, '.foo'), undefined);
 		assert.strictEqual(get(object, 1), undefined);
 	});
+
+	QUnit.test('get правильно работает с большой вложенностью', function (assert) {
+		const object = {
+			foo: 'bar',
+			deep: {
+				hested: {
+					field: 'baz',
+					more: {
+						deeper: {
+							field: 'yes'
+						}
+					}
+				}
+			}
+		};
+
+		assert.strictEqual(get(object, '.deep.hested.more.deeper.field'), object.deep.hested.more.deeper.field);
+		assert.strictEqual(get(object, '.deep.hested.more'), object.deep.hested.more);
+	});
 });
